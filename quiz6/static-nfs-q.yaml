@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Namespace
+metadata: 
+  name: quiz6
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  namespace: quiz6
+  name: static-nfs
+spec: 
+  replicas: 3
+  selector: 
+    matchLabels: 
+      app: nfs
+  template: 
+    metadata: 
+      labels: 
+        app: nfs
+    spec: 
+      containers: 
+      - name: nginx
+        image: nginx
+        volume: 
+        - name: nfs-volume
+          mountPath: /var/www/html
+      volumes: 
+      - name: nfs-vol
+      nfs: 
+        server: 211.183.3.100 
+        path: /voltest

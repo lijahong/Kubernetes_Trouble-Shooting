@@ -1,0 +1,11 @@
+Q. 아래와 같이 testuser 계정으로 명령 실행시 service 에 대한 목록확인만  가능하도록 하시오. 
+
+root@manager:~/k8s-quiz/quiz8# kubectl get svc -n quiz8 --as system:serviceaccount:quiz8:testuser
+No resources found in quiz8 namespace.
+root@manager:~/k8s-quiz/quiz8#
+root@manager:~/k8s-quiz/quiz8#
+root@manager:~/k8s-quiz/quiz8# kubectl get pod -n quiz8 --as system:serviceaccount:quiz8:testuser
+Error from server (Forbidden): pods is forbidden: User "system:serviceaccount:quiz8:testuser" cannot list resource "pods" in API group "" in the namespace "quiz8"
+root@manager:~/k8s-quiz/quiz8#
+root@manager:~/k8s-quiz/quiz8#
+

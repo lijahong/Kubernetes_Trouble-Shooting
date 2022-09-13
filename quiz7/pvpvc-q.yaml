@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: Namespace
+metadata: 
+  name: quiz7 
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata: 
+  name: nfs-pv
+spec: 
+  storageClassName: "pvpvctest"
+  capacity: 
+    storage: "100Mi"
+  accessModes: 
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain 
+  nfs: 
+    server: 211.183.3.100 
+    path: /voltest
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata: 
+  name: nfs-pvc
+spec: 
+  storageClassName: ""
+  accessModes: 
+    - ReadWriteOnce
+  resources: 
+    requests: 
+      storage: "100Mi"
+
+---
+apiVersion: v1
+kind: ResourceQuota 
+metadata: 
+  namespace: quiz7 
+  name: stgquota
+spec: 
+  hard: 
+    persistentvolumeclaims: "4"
+    requests.storage: "400Mi"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  namespace: quiz7 
+  name: nfs-pv-pvc
+spec: 
+  replicas: 3
+  selector:
+    matchLabels: 
+      app: nfs-pvc
+  template: 
+    metadata: 
+      labels: 
+        app: nfs-pvc
+    spec: 
+      containers: 
+      - name: nginxpod
+        image: nginx
+        volumeMounts: 
+        - name: nfs-volume
+          mountPath: /root
+
+      volumes: 
+      - name: nfs-vol 
+        persistentVolumeClaim: 
+          claimName: nfs-vol

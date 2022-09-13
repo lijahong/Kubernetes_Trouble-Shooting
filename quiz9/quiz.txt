@@ -1,0 +1,6 @@
+Q. 쉘 파일을 실행한 뒤, 30초 정도 후에 다시한번 'kubectl get hpa' 를 했을 때 아래와 같은 결과를 확인할 수 있어야 한다
+
+root@manager:~/k8s-quiz/quiz9# k get hpa
+NAME            REFERENCE                  TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
+autoscaletest   Deployment/autoscaletest   0%/10%    3         10        3          45s
+

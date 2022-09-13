@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Namespace
+metadata: 
+  name: quiz1
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: my-nginx-deployment
+  namespace: quiz1 #add namespace
+spec: 
+  replicas: 3
+  selector: 
+    matchLabels: #O
+      app: my-nginx-pod #label fix
+  template: 
+    metadata: 
+      name: my-nginx-pod
+      labels: 
+        app: my-nginx-pod
+    spec: 
+      containers:
+      - name: nginx
+        image: nginx:1.10
+        ports: 
+        - containerPort: 80

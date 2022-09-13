@@ -1,0 +1,7 @@
+Q. ./deploy.sh 를 실행했을 경우 아래와 같은 결과가 출력되어야 하며 EXTERNAL-IP 주소를 웹브라우저에 입력했을 경우 nginx 페이지가 보여야 한다
+
+root@manager:~/k8s-quiz/quiz4# k get svc -n quiz4
+NAME    TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)        AGE
+nginx   LoadBalancer   10.98.158.127   211.183.3.202   80:32739/TCP   52s
+root@manager:~/k8s-quiz/quiz4
+

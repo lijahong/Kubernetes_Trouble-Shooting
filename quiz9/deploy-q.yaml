@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: autoscaletest
+spec: 
+  selector:
+    matchLabels: 
+      color: blue
+  replicas: 3
+  template: 
+    metadata: 
+      labels: 
+        color: blue
+    spec: 
+      containers: 
+      - name: autoscaletest-nginx
+        image: nginx 
+        ports: 
+        - containerPort: 80 
+      resources: 
+        limits: 
+          cpu: 200m
+        requests: 
+          cpu: 500m
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: autoscaletest-np
+spec: 
+  ports: 
+  - name: autoscaletest-port
+    port: 8080
+    targetPort: 80 
+    nodePort: 30009
+  selector: 
+    color: green
+  type: NodePort

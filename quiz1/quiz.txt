@@ -1,0 +1,8 @@
+kubectl get pod -n quiz 를 했을 때 아래와 같은 결과가 나와야 합니다
+
+root@manager:~/k8s-quiz/quiz1# k get pod -n quiz1
+NAME                                   READY   STATUS    RESTARTS   AGE
+my-nginx-deployment-7484748b57-bdvgp   1/1     Running   0          51s
+my-nginx-deployment-7484748b57-crlpd   1/1     Running   0          51s
+my-nginx-deployment-7484748b57-rf6zh   1/1     Running   0          51s
+root@manager:~/k8s-quiz/quiz1# 

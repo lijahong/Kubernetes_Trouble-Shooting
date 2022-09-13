@@ -1,0 +1,9 @@
+Q. kubectl apply -f '파일명' 입력한 뒤 포드와 서비스(노드포트) 를 배포했을 때 아래와 같은 결과가 출력되어야 한다. 이때 노드포트는 랜덤으로 할당된다.
+
+root@manager:~/k8s-quiz/quiz3# k get svc -n quiz3
+NAME                 TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+webserver-nodeport   NodePort   10.104.107.84   <none>        8080:32151/TCP   10s
+root@manager:~/k8s-quiz/quiz3#
+
+
+또한 위와 같은 결과를 확인했을 경우 윈도우에서 브라우저를 열고 주소창에 'http://211.183.3.101:32151' 과 같이 입력했을 경우 nginx 의 페이지가 출력되어야 한다
